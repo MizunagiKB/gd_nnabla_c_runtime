@@ -1,0 +1,204 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpoygvc2bkkkp"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_2ndun"]
+
+[node name="nnabla_test" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2ndun")
+metadata/_edit_lock_ = true
+
+[node name="edit_0" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 128.0
+offset_right = 216.0
+offset_bottom = 159.0
+text = "0"
+alignment = 1
+
+[node name="edit_1" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 128.0
+offset_right = 304.0
+offset_bottom = 159.0
+text = "0"
+alignment = 1
+
+[node name="edit_2" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 312.0
+offset_top = 128.0
+offset_right = 392.0
+offset_bottom = 159.0
+text = "0"
+alignment = 1
+
+[node name="edit_3" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 128.0
+offset_right = 480.0
+offset_bottom = 159.0
+text = "0"
+alignment = 1
+
+[node name="edit_4" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 488.0
+offset_top = 128.0
+offset_right = 568.0
+offset_bottom = 159.0
+text = "0"
+alignment = 1
+
+[node name="edit_5" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 584.0
+offset_top = 128.0
+offset_right = 664.0
+offset_bottom = 159.0
+text = "0"
+alignment = 1
+
+[node name="edit_6" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 672.0
+offset_top = 128.0
+offset_right = 752.0
+offset_bottom = 159.0
+text = "0"
+alignment = 1
+
+[node name="edit_7" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 760.0
+offset_top = 128.0
+offset_right = 840.0
+offset_bottom = 159.0
+text = "0"
+alignment = 1
+
+[node name="edit_8" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 848.0
+offset_top = 128.0
+offset_right = 928.0
+offset_bottom = 159.0
+text = "0"
+alignment = 1
+
+[node name="edit_9" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 936.0
+offset_top = 128.0
+offset_right = 1016.0
+offset_bottom = 159.0
+text = "0"
+alignment = 1
+
+[node name="label_0" type="Label" parent="."]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 168.0
+offset_right = 216.0
+offset_bottom = 200.0
+horizontal_alignment = 1
+
+[node name="label_1" type="Label" parent="."]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 168.0
+offset_right = 304.0
+offset_bottom = 200.0
+horizontal_alignment = 1
+
+[node name="label_2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 312.0
+offset_top = 168.0
+offset_right = 392.0
+offset_bottom = 200.0
+horizontal_alignment = 1
+
+[node name="label_3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 168.0
+offset_right = 480.0
+offset_bottom = 200.0
+horizontal_alignment = 1
+
+[node name="label_4" type="Label" parent="."]
+layout_mode = 0
+offset_left = 488.0
+offset_top = 168.0
+offset_right = 568.0
+offset_bottom = 200.0
+horizontal_alignment = 1
+
+[node name="label_5" type="Label" parent="."]
+layout_mode = 0
+offset_left = 584.0
+offset_top = 168.0
+offset_right = 664.0
+offset_bottom = 200.0
+horizontal_alignment = 1
+
+[node name="label_6" type="Label" parent="."]
+layout_mode = 0
+offset_left = 672.0
+offset_top = 168.0
+offset_right = 752.0
+offset_bottom = 200.0
+horizontal_alignment = 1
+
+[node name="label_7" type="Label" parent="."]
+layout_mode = 0
+offset_left = 760.0
+offset_top = 168.0
+offset_right = 840.0
+offset_bottom = 200.0
+horizontal_alignment = 1
+
+[node name="label_8" type="Label" parent="."]
+layout_mode = 0
+offset_left = 848.0
+offset_top = 168.0
+offset_right = 928.0
+offset_bottom = 200.0
+horizontal_alignment = 1
+
+[node name="label_9" type="Label" parent="."]
+layout_mode = 0
+offset_left = 936.0
+offset_top = 168.0
+offset_right = 1016.0
+offset_bottom = 200.0
+horizontal_alignment = 1
+
+[node name="btn_setup" type="Button" parent="."]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 256.0
+offset_right = 568.0
+offset_bottom = 288.0
+focus_mode = 0
+text = "Setup"
+
+[node name="btn_forward" type="Button" parent="."]
+layout_mode = 0
+offset_left = 584.0
+offset_top = 256.0
+offset_right = 704.0
+offset_bottom = 288.0
+focus_mode = 0
+text = "Forward"
+
+[connection signal="pressed" from="btn_setup" to="." method="_on_btn_setup_pressed"]
+[connection signal="pressed" from="btn_forward" to="." method="_on_btn_forward_pressed"]
