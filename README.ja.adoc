@@ -34,3 +34,9 @@ nnabla_c_runtimeを手元でビルドする場合はUniversal Binaryの指定を
 --
 export CLAGS="-arch x86_64 -arch arm64"
 --
+
+== ライセンスについて
+
+このプログラムはGodot EngineにあわせてMIT Licenseとして提供していますが、依存するNNabla C RuntimeはApache License 2.0となります。
+
+ライセンス表記を行う際はご注意ください。
