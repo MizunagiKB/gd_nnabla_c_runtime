@@ -28,11 +28,13 @@ git checkout refs/tags/v1.36.0
 
 === macOS
 
-nnabla_c_runtimeを手元でビルドする場合はUniversal Binaryの指定を行ってください。
-
 [source,zsh]
 --
-export CLAGS="-arch x86_64 -arch arm64"
+pushd thirdparty/nnabla-c-runtime
+# for Universal Binary
+export CFLAGS="-arch x86_64 -arch arm64"
+make nnabla-c-runtime-compile
+popd
 --
 
 == ライセンスについて

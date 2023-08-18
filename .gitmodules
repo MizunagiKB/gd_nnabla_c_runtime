@@ -2,7 +2,6 @@
 	path = godot-cpp
 	url = https://github.com/godotengine/godot-cpp
 	branch = 4.1
-[submodule "src/deps/nnabla-c-runtime"]
-	path = src/deps/nnabla-c-runtime
-	url = https://github.com/sony/nnabla-c-runtime.git
-	branch = maaster
+[submodule "thirdparty/nnabla-c-runtime"]
+	path = thirdparty/nnabla-c-runtime
+	url = https://github.com/sony/nnabla-c-runtime

@@ -5,14 +5,16 @@ env = SConscript("godot-cpp/SConstruct")
 
 # Add source files.
 env.Append(CPPPATH=["src/"])
-env.Append(CPPPATH=["src/deps/nnabla-c-runtime/include"])
-env.Append(LIBPATH=["src/deps/nnabla-c-runtime/build/src/functions"])
-env.Append(LIBPATH=["src/deps/nnabla-c-runtime/build/src/runtime"])
+
+env.Append(CPPPATH=["thirdparty/nnabla-c-runtime/include"])
+env.Append(LIBPATH=["thirdparty/nnabla-c-runtime/build/src/functions"])
+env.Append(LIBPATH=["thirdparty/nnabla-c-runtime/build/src/runtime"])
+
 env.Append(LIBS=["nnablart_functions", "nnablart_runtime"])
 
 sources = Glob("src/*.cpp")
 
-(extension_path,) = glob("proj/addons/*/*.gdextension")
+(extension_path,) = glob("demo/addons/*/*.gdextension")
 
 # Find the addon path (e.g. project/addons/example).
 addon_path = Path(extension_path).parent
