@@ -6,7 +6,7 @@
 using namespace godot;
 
 
-void *gd_rt_variable_malloc_func(unsigned long size) {
+void *gd_rt_variable_malloc_func(size_t size) {
     printf("gd_rt_variable_malloc_func = %lu\n", size);
     return memalloc(size);
 }
@@ -16,7 +16,7 @@ void gd_rt_variable_free_func(void *ptr) {
     memfree(ptr);
 }
 
-void *gd_rt_malloc_func(unsigned long size) {
+void *gd_rt_malloc_func(size_t size) {
     printf("gd_rt_malloc_func = %lu\n", size);
     return memalloc(size);
 }
