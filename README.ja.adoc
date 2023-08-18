@@ -1,0 +1,36 @@
+= NNabla C Runtime for GDScript
+:lang: ja
+:doctype: book
+:author: MizunagiKB
+:toc: left
+:toclevels: 3
+:icons: font
+:experimental:
+:stem:
+
+== このモジュールについて
+
+このモジュールはSONYが開発している、link:https://github.com/sony/nnabla-c-runtime[NNabla C Runtime]をGDScriptから呼び出せるようにしたものです。
+
+対応しているGodot Engineは4.1を想定しており、ビルドしたNNabla C Runtimeはv1.36.0となります。
+
+
+== ビルド方法
+
+NNabla C Runtime をビルドする場合は、バージョン指定を行ってください。
+
+[source,zsh]
+--
+# v1.36.0を指定する場合の例
+git checkout refs/tags/v1.36.0
+--
+
+
+=== macOS
+
+nnabla_c_runtimeを手元でビルドする場合はUniversal Binaryの指定を行ってください。
+
+[source,zsh]
+--
+export CLAGS="-arch x86_64 -arch arm64"
+--
