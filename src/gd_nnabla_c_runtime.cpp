@@ -39,6 +39,9 @@ void GDNNablaCRuntime::_bind_methods() {
     ClassDB::bind_method(D_METHOD("rt_output_shape", "idx", "shape_idx"), &GDNNablaCRuntime::rt_output_shape);
     ClassDB::bind_method(D_METHOD("rt_output_buffer", "idx"), &GDNNablaCRuntime::rt_output_buffer);
 
+    ClassDB::bind_method(D_METHOD("rt_input_variable", "idx"), &GDNNablaCRuntime::rt_input_variable);
+    ClassDB::bind_method(D_METHOD("rt_output_variable", "idx"), &GDNNablaCRuntime::rt_input_variable);
+
     ClassDB::bind_method(D_METHOD("rt_forward"), &GDNNablaCRuntime::rt_forward);
 
     ClassDB::bind_method(D_METHOD("rt_nnabla_version"), &GDNNablaCRuntime::rt_nnabla_version);
@@ -72,17 +75,27 @@ GDNNablaCRuntime::ReturnValue GDNNablaCRuntime::rt_allocate_context() {
 
 GDNNablaCRuntime::ReturnValue GDNNablaCRuntime::rt_initialize_context(PackedByteArray nnb) {
     ERR_FAIL_COND_V(this->context == 0, NOERROR);
-    nn_network_t *net = const_cast<nn_network_t *>(reinterpret_cast<const nn_network_t *>(nnb.ptr()));
-    printf("rt_initialize_context\n");
-    return static_cast<ReturnValue>(::rt_initialize_context(this->context, net));
+    ERR_FAIL_COND_V(this->net != nullptr, NOERROR);
+
+    this->net = static_cast<nn_network_t*>(memalloc(nnb.size()));
+    ::memcpy(this->net, nnb.ptr(), nnb.size());
+
+    return static_cast<ReturnValue>(::rt_initialize_context(this->context, this->net));
 }
 
 GDNNablaCRuntime::ReturnValue GDNNablaCRuntime::rt_free_context() {
     if(this->context == 0) {
         return ReturnValue::NOERROR;
     }
+
+    if(this->net != nullptr) {
+        memfree(this->net);
+        this->net = nullptr;
+    }
+
     ReturnValue ret = static_cast<ReturnValue>(::rt_free_context(&this->context));
     this->context = 0;
+
     return ret;
 }
 
@@ -109,7 +122,6 @@ bool GDNNablaCRuntime::rt_input_buffer(int p_idx, PackedFloat32Array input) {
     ERR_FAIL_INDEX_V(p_idx, ::rt_num_of_input(this->context), false);
     void* ptr = ::rt_input_buffer(this->context, p_idx);
     memcpy(ptr, input.ptr(), input.size() * sizeof(float));
-    printf("rt_input_buffer\n");
     return true;
 }
 
@@ -144,8 +156,45 @@ PackedFloat32Array GDNNablaCRuntime::rt_output_buffer(int p_idx) {
 
     memcpy(output.ptrw(), ptr, output.size() * sizeof(float));
 
-
     return output;
+}
+
+Dictionary GDNNablaCRuntime::rt_input_variable(int p_idx) {
+    ERR_FAIL_INDEX_V(p_idx, ::rt_num_of_input(this->context), Dictionary());
+    Dictionary result;
+    nn_variable_t *variable = ::rt_input_variable(this->context, p_idx);
+    result["id"] = variable->id;
+
+    Array shape;
+    for(int shape_idx = 0; shape_idx < ::rt_input_dimension(this->context, p_idx); shape_idx++) {
+        shape.append(::rt_input_shape(this->context, p_idx, shape_idx));
+    }
+    result["shape"] = shape;
+
+    result["type"] = variable->type;
+    result["fp_pos"] = variable->fp_pos;
+    result["data_index"] = variable->data_index;
+
+   return result;
+}
+
+Dictionary GDNNablaCRuntime::rt_output_variable(int p_idx) {
+    ERR_FAIL_INDEX_V(p_idx, ::rt_num_of_output(this->context), Dictionary());
+    Dictionary result;
+    nn_variable_t *variable = ::rt_output_variable(this->context, p_idx);
+    result["id"] = variable->id;
+
+    Array shape;
+    for(int shape_idx = 0; shape_idx < ::rt_output_dimension(this->context, p_idx); shape_idx++) {
+        shape.append(::rt_output_shape(this->context, p_idx, shape_idx));
+    }
+    result["shape"] = shape;
+
+    result["type"] = variable->type;
+    result["fp_pos"] = variable->fp_pos;
+    result["data_index"] = variable->data_index;
+
+   return result;
 }
 
 GDNNablaCRuntime::ReturnValue GDNNablaCRuntime::rt_forward() {

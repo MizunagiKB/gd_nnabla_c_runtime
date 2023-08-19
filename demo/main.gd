@@ -7,6 +7,8 @@ var net_nnb
 var list_edit := []
 var list_label := []
 
+var nn_crt: GDNNablaCRuntime;
+
 
 func _ready():
 
@@ -25,6 +27,12 @@ func _ready():
         $label_5, $label_6, $label_7, $label_8, $label_9
     ]
 
+    nn_crt = GDNNablaCRuntime.new()
+
+    var err = nn_crt.rt_allocate_context()
+    assert(err == GDNNablaCRuntime.NOERROR)
+
+    nn_crt.rt_initialize_context(net_nnb)
 
 func _process(_delta):
     pass
@@ -42,20 +50,26 @@ func _on_btn_setup_pressed():
 
 func _on_btn_forward_pressed():
 
-    var nn_crt = GDNNablaCRuntime.new()
 
     var err
 
-    err = nn_crt.rt_allocate_context()
-    assert(err == GDNNablaCRuntime.NOERROR)
+    var dict_i = nn_crt.rt_input_variable(0)
+    print(dict_i)
 
-    nn_crt.rt_initialize_context(net_nnb)
+    for i in range(nn_crt.rt_input_dimension(0)):
+        print("idx:{0} shape:{1}".format([i, nn_crt.rt_input_shape(0, i)]))
 
     nn_crt.rt_input_buffer(0, input)
     
     err = nn_crt.rt_forward()
     assert(err == GDNNablaCRuntime.NOERROR)
     
+    var dict_o = nn_crt.rt_output_variable(0)
+    print(dict_o)
+
+    for i in range(nn_crt.rt_output_dimension(0)):
+        print("idx:{0} shape:{1}".format([i, nn_crt.rt_output_shape(0, i)]))
+
     var output = nn_crt.rt_output_buffer(0)
 
     var v = -1
@@ -69,4 +83,4 @@ func _on_btn_forward_pressed():
     if v > -1 and v < 10:
         list_label[idx].text = "o"
 
-    nn_crt.rt_free_context()
+    # nn_crt.rt_free_context()
