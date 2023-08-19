@@ -8,6 +8,7 @@
 :experimental:
 :stem:
 
+
 == このモジュールについて
 
 このモジュールはSONYが開発している、link:https://github.com/sony/nnabla-c-runtime[NNabla C Runtime]をGDScriptから呼び出せるようにしたものです。
@@ -26,6 +27,19 @@ git checkout refs/tags/v1.36.0
 --
 
 
+=== Windows
+
+[source]
+--
+pushd thirdparty\nnabla-c-runtime
+build-tools\msvc\build.bat
+popd
+
+scons platform=windows target=template_debug
+scons platform=windows target=template_release
+--
+
+
 === macOS
 
 [source,zsh]
@@ -35,7 +49,11 @@ pushd thirdparty/nnabla-c-runtime
 export CFLAGS="-arch x86_64 -arch arm64"
 make nnabla-c-runtime-compile
 popd
+
+scons platform=macos target=template_debug
+scons platform=macos target=template_release
 --
+
 
 == ライセンスについて
 

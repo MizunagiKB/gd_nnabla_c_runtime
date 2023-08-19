@@ -17,3 +17,6 @@ mono_crash.*.json
 .sconsign.dblite
 .DS_Store
 *.os
+*.obj
+*.exp
+*.lib

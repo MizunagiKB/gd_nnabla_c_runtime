@@ -6,9 +6,15 @@ env = SConscript("godot-cpp/SConstruct")
 # Add source files.
 env.Append(CPPPATH=["src/"])
 
-env.Append(CPPPATH=["thirdparty/nnabla-c-runtime/include"])
-env.Append(LIBPATH=["thirdparty/nnabla-c-runtime/build/src/functions"])
-env.Append(LIBPATH=["thirdparty/nnabla-c-runtime/build/src/runtime"])
+if env["platform"] == "windows":
+    env.Append(CPPPATH=["thirdparty/nnabla-c-runtime/include"])
+    env.Append(LIBPATH=["thirdparty/nnabla-c-runtime/build/src/functions/Release"])
+    env.Append(LIBPATH=["thirdparty/nnabla-c-runtime/build/src/runtime/Release"])
+else:
+    env.Append(CPPPATH=["thirdparty/nnabla-c-runtime/include"])
+    env.Append(LIBPATH=["thirdparty/nnabla-c-runtime/build/src/functions"])
+    env.Append(LIBPATH=["thirdparty/nnabla-c-runtime/build/src/runtime"])
+
 
 env.Append(LIBS=["nnablart_functions", "nnablart_runtime"])
 
