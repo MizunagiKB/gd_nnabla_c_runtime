@@ -7,22 +7,18 @@ using namespace godot;
 
 
 void *gd_rt_variable_malloc_func(size_t size) {
-    printf("gd_rt_variable_malloc_func = %lu\n", size);
     return memalloc(size);
 }
 
 void gd_rt_variable_free_func(void *ptr) {
-    printf("gd_rt_variable_free_func\n");
     memfree(ptr);
 }
 
 void *gd_rt_malloc_func(size_t size) {
-    printf("gd_rt_malloc_func = %lu\n", size);
     return memalloc(size);
 }
 
 void gd_rt_free_func(void *ptr) {
-    printf("gd_rt_free_func\n");
     memfree(ptr);
 }
 
@@ -142,8 +138,6 @@ PackedFloat32Array GDNNablaCRuntime::rt_output_buffer(int p_idx) {
     void* ptr = ::rt_output_buffer(this->context, p_idx);
     int size = ::rt_output_size(this->context, p_idx);
 
-    printf("rt_output_buffer = %d\n", size);
-
     PackedFloat32Array output;
 
     output.resize(size);
@@ -155,7 +149,6 @@ PackedFloat32Array GDNNablaCRuntime::rt_output_buffer(int p_idx) {
 }
 
 GDNNablaCRuntime::ReturnValue GDNNablaCRuntime::rt_forward() {
-    printf("rt_forward\n");
     return static_cast<ReturnValue>(::rt_forward(this->context));
 }
 
