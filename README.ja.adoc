@@ -34,7 +34,14 @@ git checkout refs/tags/v1.36.0
 pushd thirdparty\nnabla-c-runtime
 build-tools\msvc\build.bat
 popd
+--
 
+上のコマンドでビルド自体は完了しますが、Godot側とビルドオプションが異なっているためにリンクが失敗します。
+
+現状では、ビルド完了後に VisualStudio でソリューションファイルを開いて /MT, /MTd でビルドされる様にコンパイルオプションを修正後、ビルドしなおしてください。
+
+[source]
+--
 scons platform=windows target=template_debug
 scons platform=windows target=template_release
 --
