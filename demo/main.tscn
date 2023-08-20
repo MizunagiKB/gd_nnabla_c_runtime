@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://dpoygvc2bkkkp"]
+[gd_scene load_steps=6 format=3 uid="uid://dpoygvc2bkkkp"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_2ndun"]
+[ext_resource type="Texture2D" uid="uid://dusjdo6u024q3" path="res://res/t10k/img_0000.png" id="2_p3q60"]
+[ext_resource type="Texture2D" uid="uid://ht24am7wbdu6" path="res://res/t10k/img_0001.png" id="3_qrgsa"]
+[ext_resource type="Texture2D" uid="uid://c6g0vx2af6evo" path="res://res/t10k/img_0002.png" id="4_p4a88"]
+[ext_resource type="Texture2D" uid="uid://c32wrpc1532nj" path="res://res/t10k/img_0003.png" id="5_7hl7k"]
 
 [node name="nnabla_test" type="Control"]
 layout_mode = 3
@@ -14,191 +18,236 @@ metadata/_edit_lock_ = true
 
 [node name="edit_0" type="LineEdit" parent="."]
 layout_mode = 0
-offset_left = 136.0
-offset_top = 128.0
-offset_right = 216.0
-offset_bottom = 159.0
+offset_left = 24.0
+offset_top = 64.0
+offset_right = 104.0
+offset_bottom = 95.0
 text = "0"
 alignment = 1
+
+[node name="label" type="Label" parent="edit_0"]
+layout_mode = 0
+offset_top = 40.0
+offset_right = 80.0
+offset_bottom = 72.0
+horizontal_alignment = 1
 
 [node name="edit_1" type="LineEdit" parent="."]
 layout_mode = 0
-offset_left = 224.0
-offset_top = 128.0
-offset_right = 304.0
-offset_bottom = 159.0
+offset_left = 112.0
+offset_top = 64.0
+offset_right = 192.0
+offset_bottom = 95.0
 text = "0"
 alignment = 1
+
+[node name="label" type="Label" parent="edit_1"]
+offset_top = 40.0
+offset_right = 80.0
+offset_bottom = 72.0
+horizontal_alignment = 1
 
 [node name="edit_2" type="LineEdit" parent="."]
 layout_mode = 0
-offset_left = 312.0
-offset_top = 128.0
-offset_right = 392.0
-offset_bottom = 159.0
+offset_left = 200.0
+offset_top = 64.0
+offset_right = 280.0
+offset_bottom = 95.0
 text = "0"
 alignment = 1
+
+[node name="label" type="Label" parent="edit_2"]
+offset_top = 40.0
+offset_right = 80.0
+offset_bottom = 72.0
+horizontal_alignment = 1
 
 [node name="edit_3" type="LineEdit" parent="."]
 layout_mode = 0
-offset_left = 400.0
-offset_top = 128.0
-offset_right = 480.0
-offset_bottom = 159.0
+offset_left = 288.0
+offset_top = 64.0
+offset_right = 368.0
+offset_bottom = 95.0
 text = "0"
 alignment = 1
+
+[node name="label" type="Label" parent="edit_3"]
+offset_top = 40.0
+offset_right = 80.0
+offset_bottom = 72.0
+horizontal_alignment = 1
 
 [node name="edit_4" type="LineEdit" parent="."]
 layout_mode = 0
-offset_left = 488.0
-offset_top = 128.0
-offset_right = 568.0
-offset_bottom = 159.0
+offset_left = 376.0
+offset_top = 64.0
+offset_right = 456.0
+offset_bottom = 95.0
 text = "0"
 alignment = 1
+
+[node name="label" type="Label" parent="edit_4"]
+offset_top = 40.0
+offset_right = 80.0
+offset_bottom = 72.0
+horizontal_alignment = 1
 
 [node name="edit_5" type="LineEdit" parent="."]
 layout_mode = 0
-offset_left = 584.0
-offset_top = 128.0
-offset_right = 664.0
-offset_bottom = 159.0
+offset_left = 24.0
+offset_top = 160.0
+offset_right = 104.0
+offset_bottom = 191.0
 text = "0"
 alignment = 1
+
+[node name="label" type="Label" parent="edit_5"]
+offset_top = 40.0
+offset_right = 80.0
+offset_bottom = 72.0
+horizontal_alignment = 1
 
 [node name="edit_6" type="LineEdit" parent="."]
 layout_mode = 0
-offset_left = 672.0
-offset_top = 128.0
-offset_right = 752.0
-offset_bottom = 159.0
+offset_left = 112.0
+offset_top = 160.0
+offset_right = 192.0
+offset_bottom = 191.0
 text = "0"
 alignment = 1
+
+[node name="label" type="Label" parent="edit_6"]
+offset_top = 40.0
+offset_right = 80.0
+offset_bottom = 72.0
+horizontal_alignment = 1
 
 [node name="edit_7" type="LineEdit" parent="."]
 layout_mode = 0
-offset_left = 760.0
-offset_top = 128.0
-offset_right = 840.0
-offset_bottom = 159.0
+offset_left = 200.0
+offset_top = 160.0
+offset_right = 280.0
+offset_bottom = 191.0
 text = "0"
 alignment = 1
+
+[node name="label" type="Label" parent="edit_7"]
+offset_top = 40.0
+offset_right = 80.0
+offset_bottom = 72.0
+horizontal_alignment = 1
 
 [node name="edit_8" type="LineEdit" parent="."]
 layout_mode = 0
-offset_left = 848.0
-offset_top = 128.0
-offset_right = 928.0
-offset_bottom = 159.0
+offset_left = 288.0
+offset_top = 160.0
+offset_right = 368.0
+offset_bottom = 191.0
 text = "0"
 alignment = 1
+
+[node name="label" type="Label" parent="edit_8"]
+offset_top = 40.0
+offset_right = 80.0
+offset_bottom = 72.0
+horizontal_alignment = 1
 
 [node name="edit_9" type="LineEdit" parent="."]
 layout_mode = 0
-offset_left = 936.0
-offset_top = 128.0
-offset_right = 1016.0
-offset_bottom = 159.0
+offset_left = 376.0
+offset_top = 160.0
+offset_right = 456.0
+offset_bottom = 191.0
 text = "0"
 alignment = 1
 
-[node name="label_0" type="Label" parent="."]
-layout_mode = 0
-offset_left = 136.0
-offset_top = 168.0
-offset_right = 216.0
-offset_bottom = 200.0
-horizontal_alignment = 1
-
-[node name="label_1" type="Label" parent="."]
-layout_mode = 0
-offset_left = 224.0
-offset_top = 168.0
-offset_right = 304.0
-offset_bottom = 200.0
-horizontal_alignment = 1
-
-[node name="label_2" type="Label" parent="."]
-layout_mode = 0
-offset_left = 312.0
-offset_top = 168.0
-offset_right = 392.0
-offset_bottom = 200.0
-horizontal_alignment = 1
-
-[node name="label_3" type="Label" parent="."]
-layout_mode = 0
-offset_left = 400.0
-offset_top = 168.0
-offset_right = 480.0
-offset_bottom = 200.0
-horizontal_alignment = 1
-
-[node name="label_4" type="Label" parent="."]
-layout_mode = 0
-offset_left = 488.0
-offset_top = 168.0
-offset_right = 568.0
-offset_bottom = 200.0
-horizontal_alignment = 1
-
-[node name="label_5" type="Label" parent="."]
-layout_mode = 0
-offset_left = 584.0
-offset_top = 168.0
-offset_right = 664.0
-offset_bottom = 200.0
-horizontal_alignment = 1
-
-[node name="label_6" type="Label" parent="."]
-layout_mode = 0
-offset_left = 672.0
-offset_top = 168.0
-offset_right = 752.0
-offset_bottom = 200.0
-horizontal_alignment = 1
-
-[node name="label_7" type="Label" parent="."]
-layout_mode = 0
-offset_left = 760.0
-offset_top = 168.0
-offset_right = 840.0
-offset_bottom = 200.0
-horizontal_alignment = 1
-
-[node name="label_8" type="Label" parent="."]
-layout_mode = 0
-offset_left = 848.0
-offset_top = 168.0
-offset_right = 928.0
-offset_bottom = 200.0
-horizontal_alignment = 1
-
-[node name="label_9" type="Label" parent="."]
-layout_mode = 0
-offset_left = 936.0
-offset_top = 168.0
-offset_right = 1016.0
-offset_bottom = 200.0
+[node name="label" type="Label" parent="edit_9"]
+offset_top = 40.0
+offset_right = 80.0
+offset_bottom = 72.0
 horizontal_alignment = 1
 
 [node name="btn_setup" type="Button" parent="."]
 layout_mode = 0
-offset_left = 448.0
-offset_top = 256.0
-offset_right = 568.0
-offset_bottom = 288.0
+offset_left = 344.0
+offset_top = 448.0
+offset_right = 464.0
+offset_bottom = 480.0
 focus_mode = 0
 text = "Setup"
 
 [node name="btn_forward" type="Button" parent="."]
 layout_mode = 0
-offset_left = 584.0
-offset_top = 256.0
-offset_right = 704.0
-offset_bottom = 288.0
+offset_left = 496.0
+offset_top = 448.0
+offset_right = 616.0
+offset_bottom = 480.0
 focus_mode = 0
 text = "Forward"
+
+[node name="mnist" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 480.0
+offset_right = 960.0
+offset_bottom = 448.0
+
+[node name="tex0" type="TextureRect" parent="mnist"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 64.0
+offset_right = 96.0
+offset_bottom = 128.0
+texture = ExtResource("2_p3q60")
+
+[node name="label" type="Label" parent="mnist/tex0"]
+layout_mode = 0
+offset_top = 72.0
+offset_right = 64.0
+offset_bottom = 104.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="tex1" type="TextureRect" parent="mnist"]
+offset_left = 152.0
+offset_top = 64.0
+offset_right = 216.0
+offset_bottom = 128.0
+texture = ExtResource("3_qrgsa")
+
+[node name="label" type="Label" parent="mnist/tex1"]
+offset_top = 72.0
+offset_right = 64.0
+offset_bottom = 104.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="tex2" type="TextureRect" parent="mnist"]
+offset_left = 264.0
+offset_top = 64.0
+offset_right = 328.0
+offset_bottom = 128.0
+texture = ExtResource("4_p4a88")
+
+[node name="label" type="Label" parent="mnist/tex2"]
+offset_top = 72.0
+offset_right = 64.0
+offset_bottom = 104.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="tex3" type="TextureRect" parent="mnist"]
+offset_left = 384.0
+offset_top = 64.0
+offset_right = 448.0
+offset_bottom = 128.0
+texture = ExtResource("5_7hl7k")
+
+[node name="label" type="Label" parent="mnist/tex3"]
+offset_top = 72.0
+offset_right = 64.0
+offset_bottom = 104.0
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="btn_setup" to="." method="_on_btn_setup_pressed"]
 [connection signal="pressed" from="btn_forward" to="." method="_on_btn_forward_pressed"]

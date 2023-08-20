@@ -10,7 +10,12 @@ config_version=5
 
 [application]
 
-config/name="test"
+config/name="NNabla C Runtime Demo"
 run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=960
+window/size/viewport_height=540
