@@ -1,0 +1,65 @@
+= Usage
+:lang: ja
+:doctype: book
+:author: MizunagiKB
+:toc: left
+:toclevels: 3
+:icons: font
+:experimental:
+:stem:
+
+CAUTION: この文書は現在作成中です。
+
+
+== Neural Network Consoleの例
+
+
+=== Neural Network Consoleについて
+
+Neural Network Consoleを使用して、NNBファイルを作成する方法を説明します。
+
+Neural Network Consoleは、SONYが提供するディープラーニングモデルの開発環境となります。このツールはGUIを備えているため、直感的な操作によってディープラーニングを扱う事が出来ます。
+
+Neural Network Consoleには、Cloud版とWindowsアプリ版が用意されていますが、ここではWindowsアプリ版を使用します。
+
+
+=== Windowsアプリのダウンロード
+
+ダウンロードは以下の場所から行えます。
+
+* link:https://dl.sony.com/app/[Neural Network Console]
+* link:https://dl.sony.com/ja/app/[Neural Network Console (JP)]
+
+セットアップ方法については、オフィシャルドキュメントを参考してください。
+
+* support.dl.sony.com > Docs > link:https://support.dl.sony.com/docs-ja/%e3%82%bb%e3%83%83%e3%83%88%e3%82%a2%e3%83%83%e3%83%97/[セットアップ]
+
+NOTE: Neural Network Console本体は無料でダウンロードする事が出来るのですが、起動時にアクティベーションが必要となります。
+ +
+アクティベーションはSonyアカウントかGoogleアカウントが必要となります。
+ +
+なお、NVIDIA製GPUがインストールされていると、より高速な動作をします。（ここで扱う程度のものであればGPUは不要です）
+
+
+=== ネットワークを作成とモデル
+
+
+== Neural Network Libraryの例
+
+
+=== Neural Network Libraryについて
+
+Neural Network Librariesは、SONYが提供するオープンソースのディープラーニングライブラリです。このライブラリは、Pythonを使用して、少ないコード量で直感的に計算グラフ（ニューラルネットワーク）を定義することができます。
+
+=== Windowsアプリのダウンロード
+=== ネットワークを作成とモデル
+
+== NNabla C Runtimeで使用できる機能について
+
+NNabla C RuntimeはNNablaのすべての機能を利用する事が出来ません。
+
+モデルを作成する場合は、対応していない機能を使わないように設計してください。
+
+使用可能な機能については以下を参考にしてください。
+
+* link:https://github.com/sony/nnabla-c-runtime/blob/master/doc/SUPPORT_STATUS.md
