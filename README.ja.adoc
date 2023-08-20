@@ -11,14 +11,53 @@
 
 == このモジュールについて
 
-このモジュールはSONYが開発している、link:https://github.com/sony/nnabla-c-runtime[NNabla C Runtime]をGDScriptから呼び出せるようにしたものです。
+このモジュールはSONYが開発している、link:https://github.com/sony/nnabla-c-runtime[NNabla C Runtime]をGDScript（Godot Engine 4.1）から呼び出せるようにしたものです。
 
-対応しているGodot Engineは4.1を想定しており、ビルドしたNNabla C Runtimeはv1.36.0となります。
+学習済みモデルはNNB形式のみ対応しています。
 
+=== 使い方の例
+
+[source,gdscript]
+--
+# NNBファイルの読み込み
+var rf = FileAccess.open("res://model.nnb", FileAccess.READ)
+var rf_size = rf.get_length()
+var nnb = rf.get_buffer(rf_size)
+rf.close()
+
+# NNabla C Runtimeの作成
+nn_crt = GDNNablaCRuntime.new()
+# NNabla C Runtimeの初期化
+nn_crt.rt_allocate_context()
+# NNBファイルを設定
+nn_crt.rt_initialize_context(nnb)
+
+# 1) 入力値を設定
+var ary_i = PackedFloat32Array([1.0])
+nn_crt.rt_input_buffer(0, ary_i)
+
+# 2) 推論
+nn_crt.rt_forward()
+
+# 3) 出力値を取得
+var ary_o = nn_crt.rt_output_buffer(0)
+
+# 終了処理
+nn_crt.rt_free_context()
+--
+
+NOTE: 何度も推論を行う場合は、1, 2, 3を連続して繰り返す事が出来ます。
+
+
+== より詳しい使い方
+
+モデルの生成を含めた使い方は以下のページを参照してください。
+
+link:USAGE.ja.adoc[x]
 
 == ビルド方法
 
-NNabla C Runtime をビルドする場合は、バージョン指定を行ってください。
+NNabla C Runtime をビルドする前に、忘れずにバージョン指定を行ってください。
 
 [source,zsh]
 --
@@ -36,9 +75,12 @@ build-tools\msvc\build.bat
 popd
 --
 
-上のコマンドでビルド自体は完了しますが、Godot側とビルドオプションが異なっているためにリンクが失敗します。
+上のコマンドを実行するとビルド自体は完了するのですが、Godot側とビルドオプションが異なっているためにリンクが失敗します。
 
-現状では、ビルド完了後に VisualStudio でソリューションファイルを開いて /MT, /MTd でビルドされる様にコンパイルオプションを修正後、ビルドしなおしてください。
+リンクが失敗する原因は、NNabla C RuntimeがMultiThreadDllでビルドされるのに対して、Godot EngineがMultiThreadでビルドされるためです。
+
+現状でNNabla C Runtimeに手を加える事は考えていませんので、ビルド完了後に VisualStudio でソリューションファイルを開いて /MT, /MTd でビルドされる様にコンパイルオプションを修正してビルドしなおしてください。
+
 
 [source]
 --
@@ -46,8 +88,15 @@ scons platform=windows target=template_debug
 scons platform=windows target=template_release
 --
 
+ビルドが完了すると以下のファイルがdemo/addons/gd_nnabla_c_runtime/bin以下に生成されます。
+
+* libgd_nnabla_c_runtime.windows.debug.x86_64.dll
+* libgd_nnabla_c_runtime.windows.release.x86_64.dll
+
 
 === macOS
+
+macOSではUniversal Binaryに対応したビルドを行ってください。
 
 [source,zsh]
 --
@@ -61,9 +110,24 @@ scons platform=macos target=template_debug
 scons platform=macos target=template_release
 --
 
+ビルドが完了すると以下のファイルがdemo/addons/gd_nnabla_c_runtime/bin以下に生成されます。
+
+* libgd_nnabla_c_runtime.macos.debug.framework
+* libgd_nnabla_c_runtime.macos.release.framework
+
 
 == ライセンスについて
 
-このプログラムはGodot EngineにあわせてMIT Licenseとして提供していますが、依存するNNabla C RuntimeはApache License 2.0となります。
+このプログラムはGodot EngineにあわせてMIT Licenseとして提供しています。
+
+ただし、このプログラムが依存しているNNabla C RuntimeはApache License 2.0ライセンスとなります。
 
 ライセンス表記を行う際はご注意ください。
+
+== 関連情報
+
+* link:https://nnabla.org/[SONY Neural Network Libraries]
+* link:https://github.com/sony/nnabla[sony / nnabla (GitHub)]
+* link:https://github.com/sony/nnabla-c-runtime[sony / nnabla-c-runtime (GItHub)]
+* link:https://github.com/MizunagiKB/gd_nnabla_c_runtime[MizunagiKB / gd_nnabla_c_runtime (GitHub)]
+

@@ -1,0 +1,26 @@
+= Usage
+:lang: ja
+:doctype: book
+:author: MizunagiKB
+:toc: left
+:toclevels: 3
+:icons: font
+:experimental:
+:stem:
+
+CAUTION: この文書は現在作成中です。
+
+
+== Neural Network Consoleの例
+
+Neural Network Consoleは、SONYが提供するディープラーニングツールです。このツールはGUIを備えているため、直感的な操作によってディープラーニングを扱う事が出来ます。
+
+Neural Network Consoleには、Cloud版とWindowsアプリ版が用意されています。
+
+Cloud版はブラウザベースで処理を行い、Windowsアプリ版は手元のWindows PCにアプリをインストールして使用することができます。
+
+
+== Neural Network Libraryの例
+
+Neural Network Librariesは、SONYが提供するオープンソースのディープラーニングライブラリです。このライブラリは、Pythonを使用して、少ないコード量で直感的に計算グラフ（ニューラルネットワーク）を定義することができます。
+
