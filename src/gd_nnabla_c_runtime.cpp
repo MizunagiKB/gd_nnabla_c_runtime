@@ -40,7 +40,7 @@ void GDNNablaCRuntime::_bind_methods() {
     ClassDB::bind_method(D_METHOD("rt_output_buffer", "idx"), &GDNNablaCRuntime::rt_output_buffer);
 
     ClassDB::bind_method(D_METHOD("rt_input_variable", "idx"), &GDNNablaCRuntime::rt_input_variable);
-    ClassDB::bind_method(D_METHOD("rt_output_variable", "idx"), &GDNNablaCRuntime::rt_input_variable);
+    ClassDB::bind_method(D_METHOD("rt_output_variable", "idx"), &GDNNablaCRuntime::rt_output_variable);
 
     ClassDB::bind_method(D_METHOD("rt_forward"), &GDNNablaCRuntime::rt_forward);
 
