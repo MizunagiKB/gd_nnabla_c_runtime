@@ -5,7 +5,6 @@ import struct
 
 import numpy as np
 import httpx
-import PIL.Image
 
 import nnabla as nn
 import nnabla.utils.save
@@ -127,7 +126,6 @@ def inference(dict_mnist: dict, modelfile="model_mnist.nnp"):
     valid_count = 0
     for n in range(data_size):
         vx = test_d[n]
-        vy = test_l[n]
 
         in_x.d = np.reshape(vx, [1, 784])
         f.forward()
