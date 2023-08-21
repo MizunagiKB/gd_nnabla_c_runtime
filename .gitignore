@@ -24,5 +24,7 @@ mono_crash.*.json
 # example
 example/mnist/dataset/*.gz
 example/mnist/*.nnp
+example/mnist/*.nnb
 
-example/simple/dataset/*.csv
+example/simple/*.nnp
+example/simple/*.nnb
