@@ -1,0 +1,70 @@
+= NNabla C Runtime for GDScript
+:lang: ja
+:doctype: book
+:author: MizunagiKB
+:toc: left
+:toclevels: 3
+:icons: font
+:experimental:
+:stem:
+
+
+== ビルド方法
+
+NNabla C Runtime をビルドする前に、忘れずにバージョン指定を行ってください。
+
+[source,zsh]
+--
+# v1.36.0を指定する場合の例
+git checkout refs/tags/v1.36.0
+--
+
+
+=== Windows
+
+[source]
+--
+pushd thirdparty\nnabla-c-runtime
+build-tools\msvc\build.bat
+popd
+--
+
+上のコマンドを実行するとビルド自体は完了するのですが、Godot側とビルドオプションが異なっているためにリンクが失敗します。
+
+リンクが失敗する原因は、NNabla C RuntimeがMultiThreadDllでビルドされるのに対して、Godot EngineがMultiThreadでビルドされるためです。
+
+現状でNNabla C Runtimeに手を加える事は考えていませんので、ビルド完了後に VisualStudio でソリューションファイルを開いて /MT, /MTd でビルドされる様にコンパイルオプションを修正してビルドしなおしてください。
+
+
+[source]
+--
+scons platform=windows target=template_debug
+scons platform=windows target=template_release
+--
+
+ビルドが完了すると以下のファイルがdemo/addons/gd_nnabla_c_runtime/bin以下に生成されます。
+
+* libgd_nnabla_c_runtime.windows.debug.x86_64.dll
+* libgd_nnabla_c_runtime.windows.release.x86_64.dll
+
+
+=== macOS
+
+macOSではUniversal Binaryに対応したビルドを行ってください。
+
+[source,zsh]
+--
+pushd thirdparty/nnabla-c-runtime
+# for Universal Binary
+export CFLAGS="-arch x86_64 -arch arm64"
+make nnabla-c-runtime-compile
+popd
+
+scons platform=macos target=template_debug
+scons platform=macos target=template_release
+--
+
+ビルドが完了すると以下のファイルがdemo/addons/gd_nnabla_c_runtime/bin以下に生成されます。
+
+* libgd_nnabla_c_runtime.macos.debug.framework
+* libgd_nnabla_c_runtime.macos.release.framework
