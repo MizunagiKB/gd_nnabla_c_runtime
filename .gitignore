@@ -14,6 +14,7 @@ export_presets.cfg
 data_*/
 mono_crash.*.json
 
+# GD NNabla C Runtime
 .DS_Store
 .sconsign.dblite
 *.os
@@ -21,10 +22,11 @@ mono_crash.*.json
 *.exp
 *.lib
 
-# example
+# example/mnist
 example/mnist/dataset/*.gz
 example/mnist/*.nnp
 example/mnist/*.nnb
 
+# example/simple
 example/simple/*.nnp
 example/simple/*.nnb
