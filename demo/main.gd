@@ -1,12 +1,13 @@
 extends Control
 
 
-var input := PackedFloat32Array()
-var list_edit := []
-var list_label := []
+var nn_crt_simple: GDNNablaCRuntime;
+var list_ui_tex := []
+var ary_simple_param := PackedFloat32Array()
 
-var nn_crt: GDNNablaCRuntime;
 var nn_crt_mnist: GDNNablaCRuntime;
+var list_ui_edit := []
+var list_ui_label := []
 var ary_mnist_param: Array[PackedFloat32Array]
 
 
@@ -33,58 +34,47 @@ func get_number(ary_output: Array[float]) -> int:
     return ary_output.find(v)
 
 
-func init_mnist():
+func init_nnabla(path: String):
 
-    var rf = FileAccess.open("res://nn_model/model_mnist.nnb", FileAccess.READ)
+    var rf = FileAccess.open(path, FileAccess.READ)
     var rf_size = rf.get_length()
     var net_nnb = rf.get_buffer(rf_size)
     rf.close()
     
-    nn_crt_mnist = GDNNablaCRuntime.new()
-
-    var err = nn_crt_mnist.rt_allocate_context()
-    assert(err == GDNNablaCRuntime.NOERROR)
-
-    nn_crt_mnist.rt_initialize_context(net_nnb)
-
-
-func _ready():
-
-    init_mnist()
-
-    var rf = FileAccess.open("res://nn_model/model.nnb", FileAccess.READ)
-    var rf_size = rf.get_length()
-    var nn_crt_nnb = rf.get_buffer(rf_size)
-    rf.close()
-
-    list_edit = [
-        $edit_0, $edit_1, $edit_2, $edit_3, $edit_4,
-        $edit_5, $edit_6, $edit_7, $edit_8, $edit_9
-    ]
-
-    list_label = [
-        $edit_0/label, $edit_1/label, $edit_2/label, $edit_3/label, $edit_4/label,
-        $edit_5/label, $edit_6/label, $edit_7/label, $edit_8/label, $edit_9/label
-    ]
-
-    nn_crt = GDNNablaCRuntime.new()
+    var nn_crt = GDNNablaCRuntime.new()
 
     var err = nn_crt.rt_allocate_context()
     assert(err == GDNNablaCRuntime.NOERROR)
 
-    nn_crt.rt_initialize_context(nn_crt_nnb)
+    nn_crt.rt_initialize_context(net_nnb)
+    
+    return nn_crt
 
-    var dict_i = nn_crt.rt_input_variable(0)
-    print(dict_i)
 
-    var dict_o = nn_crt.rt_output_variable(0)
-    print(dict_o)
+func _ready():
 
-    for i in range(nn_crt.rt_input_dimension(0)):
-        print("idx:{0} shape:{1}".format([i, nn_crt.rt_input_shape(0, i)]))
+    nn_crt_simple = init_nnabla("res://nn_model/model_simple.nnb")
+    nn_crt_mnist = init_nnabla("res://nn_model/model_mnist.nnb")
 
-    for i in range(nn_crt.rt_output_dimension(0)):
-        print("idx:{0} shape:{1}".format([i, nn_crt.rt_output_shape(0, i)]))
+    list_ui_edit = [
+        $simple/edit_0, $simple/edit_1,
+        $simple/edit_2, $simple/edit_3,
+        $simple/edit_4, $simple/edit_5,
+        $simple/edit_6, $simple/edit_7,
+        $simple/edit_8, $simple/edit_9
+    ]
+
+    list_ui_label = [
+        $simple/edit_0/label, $simple/edit_1/label,
+        $simple/edit_2/label, $simple/edit_3/label,
+        $simple/edit_4/label, $simple/edit_5/label,
+        $simple/edit_6/label, $simple/edit_7/label,
+        $simple/edit_8/label, $simple/edit_9/label
+    ]
+
+    list_ui_tex = [
+        $mnist/tex0, $mnist/tex1, $mnist/tex2, $mnist/tex3
+    ]
 
 
 func _process(_delta):
@@ -93,50 +83,59 @@ func _process(_delta):
 
 func _on_btn_setup_pressed():
 
-    input.resize(10)
-
     for i in range(10):
         var f_value = randf()
-        input.set(i, f_value)
-        list_edit[i].text = "%.2f" % f_value
+        list_ui_edit[i].text = "%.2f" % f_value
+        list_ui_label[i].text = ""
 
-    if true:
-        ary_mnist_param.clear()
-        for ui in [$mnist/tex0, $mnist/tex1, $mnist/tex2, $mnist/tex3]:
-            var idx = randi_range(0, 255)
-            ary_mnist_param.append(set_texture(ui, idx))
+    ary_mnist_param.clear()
+    for ui in list_ui_tex:
+        var idx = randi_range(0, 255)
+        ary_mnist_param.append(set_texture(ui, idx))
+
+    $mnist/tex0/label.text = ""
+    $mnist/tex1/label.text = ""
+    $mnist/tex2/label.text = ""
+    $mnist/tex3/label.text = ""
 
 
 func _on_btn_forward_pressed():
 
-    var ary_result: Array = []
+    var output
 
-    if true:
-        for ary_param in ary_mnist_param:
-            nn_crt_mnist.rt_input_buffer(0, ary_param)
-            nn_crt_mnist.rt_forward()
-            var output = nn_crt_mnist.rt_output_buffer(0)
-            ary_result.append(get_number(output))
-
-        $mnist/tex0/label.text = "%d" % ary_result[0]
-        $mnist/tex1/label.text = "%d" % ary_result[1]
-        $mnist/tex2/label.text = "%d" % ary_result[2]
-        $mnist/tex3/label.text = "%d" % ary_result[3]
-
-    nn_crt.rt_input_buffer(0, input)
+    # simple
+    ary_simple_param.clear()
+    for i in range(10):
+        ary_simple_param.append(float(list_ui_edit[i].text))
     
-    var err = nn_crt.rt_forward()
+    nn_crt_simple.rt_input_buffer(0, ary_simple_param)
+
+    var err = nn_crt_simple.rt_forward()
     assert(err == GDNNablaCRuntime.NOERROR)
     
-    var output = nn_crt.rt_output_buffer(0)
+    output = nn_crt_simple.rt_output_buffer(0)
 
     var v = -1
     var idx = 0
     for i in range(output.size()):
-        list_label[i].text = ""
+        list_ui_label[i].text = ""
         if output[i] > v:
             v = output[i]
             idx = i
 
     if v > -1 and v < 10:
-        list_label[idx].text = "o"
+        list_ui_label[idx].text = "o"
+
+    # mnist
+    var ary_result: Array = []
+
+    for ary_param in ary_mnist_param:
+        nn_crt_mnist.rt_input_buffer(0, ary_param)
+        nn_crt_mnist.rt_forward()
+        output = nn_crt_mnist.rt_output_buffer(0)
+        ary_result.append(get_number(output))
+
+    $mnist/tex0/label.text = "%d" % ary_result[0]
+    $mnist/tex1/label.text = "%d" % ary_result[1]
+    $mnist/tex2/label.text = "%d" % ary_result[2]
+    $mnist/tex3/label.text = "%d" % ary_result[3]

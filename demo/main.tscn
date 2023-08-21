@@ -16,7 +16,12 @@ grow_vertical = 2
 script = ExtResource("1_2ndun")
 metadata/_edit_lock_ = true
 
-[node name="edit_0" type="LineEdit" parent="."]
+[node name="simple" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="edit_0" type="LineEdit" parent="simple"]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 64.0
@@ -25,14 +30,14 @@ offset_bottom = 95.0
 text = "0"
 alignment = 1
 
-[node name="label" type="Label" parent="edit_0"]
+[node name="label" type="Label" parent="simple/edit_0"]
 layout_mode = 0
 offset_top = 40.0
 offset_right = 80.0
 offset_bottom = 72.0
 horizontal_alignment = 1
 
-[node name="edit_1" type="LineEdit" parent="."]
+[node name="edit_1" type="LineEdit" parent="simple"]
 layout_mode = 0
 offset_left = 112.0
 offset_top = 64.0
@@ -41,13 +46,14 @@ offset_bottom = 95.0
 text = "0"
 alignment = 1
 
-[node name="label" type="Label" parent="edit_1"]
+[node name="label" type="Label" parent="simple/edit_1"]
+layout_mode = 0
 offset_top = 40.0
 offset_right = 80.0
 offset_bottom = 72.0
 horizontal_alignment = 1
 
-[node name="edit_2" type="LineEdit" parent="."]
+[node name="edit_2" type="LineEdit" parent="simple"]
 layout_mode = 0
 offset_left = 200.0
 offset_top = 64.0
@@ -56,13 +62,14 @@ offset_bottom = 95.0
 text = "0"
 alignment = 1
 
-[node name="label" type="Label" parent="edit_2"]
+[node name="label" type="Label" parent="simple/edit_2"]
+layout_mode = 0
 offset_top = 40.0
 offset_right = 80.0
 offset_bottom = 72.0
 horizontal_alignment = 1
 
-[node name="edit_3" type="LineEdit" parent="."]
+[node name="edit_3" type="LineEdit" parent="simple"]
 layout_mode = 0
 offset_left = 288.0
 offset_top = 64.0
@@ -71,13 +78,14 @@ offset_bottom = 95.0
 text = "0"
 alignment = 1
 
-[node name="label" type="Label" parent="edit_3"]
+[node name="label" type="Label" parent="simple/edit_3"]
+layout_mode = 0
 offset_top = 40.0
 offset_right = 80.0
 offset_bottom = 72.0
 horizontal_alignment = 1
 
-[node name="edit_4" type="LineEdit" parent="."]
+[node name="edit_4" type="LineEdit" parent="simple"]
 layout_mode = 0
 offset_left = 376.0
 offset_top = 64.0
@@ -86,13 +94,14 @@ offset_bottom = 95.0
 text = "0"
 alignment = 1
 
-[node name="label" type="Label" parent="edit_4"]
+[node name="label" type="Label" parent="simple/edit_4"]
+layout_mode = 0
 offset_top = 40.0
 offset_right = 80.0
 offset_bottom = 72.0
 horizontal_alignment = 1
 
-[node name="edit_5" type="LineEdit" parent="."]
+[node name="edit_5" type="LineEdit" parent="simple"]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 160.0
@@ -101,13 +110,14 @@ offset_bottom = 191.0
 text = "0"
 alignment = 1
 
-[node name="label" type="Label" parent="edit_5"]
+[node name="label" type="Label" parent="simple/edit_5"]
+layout_mode = 0
 offset_top = 40.0
 offset_right = 80.0
 offset_bottom = 72.0
 horizontal_alignment = 1
 
-[node name="edit_6" type="LineEdit" parent="."]
+[node name="edit_6" type="LineEdit" parent="simple"]
 layout_mode = 0
 offset_left = 112.0
 offset_top = 160.0
@@ -116,13 +126,14 @@ offset_bottom = 191.0
 text = "0"
 alignment = 1
 
-[node name="label" type="Label" parent="edit_6"]
+[node name="label" type="Label" parent="simple/edit_6"]
+layout_mode = 0
 offset_top = 40.0
 offset_right = 80.0
 offset_bottom = 72.0
 horizontal_alignment = 1
 
-[node name="edit_7" type="LineEdit" parent="."]
+[node name="edit_7" type="LineEdit" parent="simple"]
 layout_mode = 0
 offset_left = 200.0
 offset_top = 160.0
@@ -131,13 +142,14 @@ offset_bottom = 191.0
 text = "0"
 alignment = 1
 
-[node name="label" type="Label" parent="edit_7"]
+[node name="label" type="Label" parent="simple/edit_7"]
+layout_mode = 0
 offset_top = 40.0
 offset_right = 80.0
 offset_bottom = 72.0
 horizontal_alignment = 1
 
-[node name="edit_8" type="LineEdit" parent="."]
+[node name="edit_8" type="LineEdit" parent="simple"]
 layout_mode = 0
 offset_left = 288.0
 offset_top = 160.0
@@ -146,13 +158,14 @@ offset_bottom = 191.0
 text = "0"
 alignment = 1
 
-[node name="label" type="Label" parent="edit_8"]
+[node name="label" type="Label" parent="simple/edit_8"]
+layout_mode = 0
 offset_top = 40.0
 offset_right = 80.0
 offset_bottom = 72.0
 horizontal_alignment = 1
 
-[node name="edit_9" type="LineEdit" parent="."]
+[node name="edit_9" type="LineEdit" parent="simple"]
 layout_mode = 0
 offset_left = 376.0
 offset_top = 160.0
@@ -161,29 +174,12 @@ offset_bottom = 191.0
 text = "0"
 alignment = 1
 
-[node name="label" type="Label" parent="edit_9"]
+[node name="label" type="Label" parent="simple/edit_9"]
+layout_mode = 0
 offset_top = 40.0
 offset_right = 80.0
 offset_bottom = 72.0
 horizontal_alignment = 1
-
-[node name="btn_setup" type="Button" parent="."]
-layout_mode = 0
-offset_left = 344.0
-offset_top = 448.0
-offset_right = 464.0
-offset_bottom = 480.0
-focus_mode = 0
-text = "Setup"
-
-[node name="btn_forward" type="Button" parent="."]
-layout_mode = 0
-offset_left = 496.0
-offset_top = 448.0
-offset_right = 616.0
-offset_bottom = 480.0
-focus_mode = 0
-text = "Forward"
 
 [node name="mnist" type="Control" parent="."]
 anchors_preset = 0
@@ -208,6 +204,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="tex1" type="TextureRect" parent="mnist"]
+layout_mode = 0
 offset_left = 152.0
 offset_top = 64.0
 offset_right = 216.0
@@ -215,6 +212,7 @@ offset_bottom = 128.0
 texture = ExtResource("3_qrgsa")
 
 [node name="label" type="Label" parent="mnist/tex1"]
+layout_mode = 0
 offset_top = 72.0
 offset_right = 64.0
 offset_bottom = 104.0
@@ -222,6 +220,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="tex2" type="TextureRect" parent="mnist"]
+layout_mode = 0
 offset_left = 264.0
 offset_top = 64.0
 offset_right = 328.0
@@ -229,6 +228,7 @@ offset_bottom = 128.0
 texture = ExtResource("4_p4a88")
 
 [node name="label" type="Label" parent="mnist/tex2"]
+layout_mode = 0
 offset_top = 72.0
 offset_right = 64.0
 offset_bottom = 104.0
@@ -236,6 +236,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="tex3" type="TextureRect" parent="mnist"]
+layout_mode = 0
 offset_left = 384.0
 offset_top = 64.0
 offset_right = 448.0
@@ -243,11 +244,30 @@ offset_bottom = 128.0
 texture = ExtResource("5_7hl7k")
 
 [node name="label" type="Label" parent="mnist/tex3"]
+layout_mode = 0
 offset_top = 72.0
 offset_right = 64.0
 offset_bottom = 104.0
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="btn_setup" type="Button" parent="."]
+layout_mode = 0
+offset_left = 344.0
+offset_top = 448.0
+offset_right = 464.0
+offset_bottom = 480.0
+focus_mode = 0
+text = "Setup"
+
+[node name="btn_forward" type="Button" parent="."]
+layout_mode = 0
+offset_left = 496.0
+offset_top = 448.0
+offset_right = 616.0
+offset_bottom = 480.0
+focus_mode = 0
+text = "Forward"
 
 [connection signal="pressed" from="btn_setup" to="." method="_on_btn_setup_pressed"]
 [connection signal="pressed" from="btn_forward" to="." method="_on_btn_forward_pressed"]
