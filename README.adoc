@@ -13,7 +13,6 @@
 
 link:README.ja.adoc[この文書の日本語版]
 
-
 This Addon is a link:https://github.com/sony/nnabla-c-runtime[NNabla C Runtime] that can be called from GDScript (Godot Engine 4.1).
 
 The available trained models are the same as the original, only in NNB format.
