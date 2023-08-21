@@ -9,11 +9,11 @@
 :stem:
 
 
-== このモジュールについて
+== このAddonについて
 
-このモジュールはSONYが開発している、link:https://github.com/sony/nnabla-c-runtime[NNabla C Runtime]をGDScript（Godot Engine 4.1）から呼び出せるようにしたものです。
+このAddonはlink:https://github.com/sony/nnabla-c-runtime[NNabla C Runtime]をGDScript（Godot Engine 4.1）から呼び出せるようにしたものです。
 
-学習済みモデルはNNB形式のみ対応しています。
+利用できる学習済みモデルは本家同様NNB形式にのみ対応しています。
 
 === 使い方の例
 
