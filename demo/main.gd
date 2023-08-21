@@ -44,10 +44,10 @@ func init_nnabla(path: String):
     var nn_crt = GDNNablaCRuntime.new()
 
     var err = nn_crt.rt_allocate_context()
-    assert(err == GDNNablaCRuntime.NOERROR)
+    assert(err == GDNNablaCRuntime.RT_RET_NOERROR)
 
     nn_crt.rt_initialize_context(net_nnb)
-    
+
     return nn_crt
 
 
@@ -55,6 +55,11 @@ func _ready():
 
     nn_crt_simple = init_nnabla("res://nn_model/model_simple.nnb")
     nn_crt_mnist = init_nnabla("res://nn_model/model_mnist.nnb")
+
+    $lbl_nnabla_version/value.text = nn_crt_simple.rt_nnabla_version()
+    $lbl_c_runtime_version/value.text = nn_crt_simple.rt_c_runtime_version()
+    $lbl_nnb_version/value.text = str(nn_crt_simple.rt_nnb_version())
+    $lbl_nnb_revision/value.text = nn_crt_simple.rt_nnb_revision()
 
     list_ui_edit = [
         $simple/edit_0, $simple/edit_1,
@@ -111,7 +116,7 @@ func _on_btn_forward_pressed():
     nn_crt_simple.rt_input_buffer(0, ary_simple_param)
 
     var err = nn_crt_simple.rt_forward()
-    assert(err == GDNNablaCRuntime.NOERROR)
+    assert(err == GDNNablaCRuntime.RT_RET_NOERROR)
     
     output = nn_crt_simple.rt_output_buffer(0)
 

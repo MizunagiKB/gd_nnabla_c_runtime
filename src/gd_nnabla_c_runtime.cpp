@@ -49,18 +49,24 @@ void GDNNablaCRuntime::_bind_methods() {
     ClassDB::bind_method(D_METHOD("rt_nnb_version"), &GDNNablaCRuntime::rt_nnb_version);
     ClassDB::bind_method(D_METHOD("rt_nnb_revision"), &GDNNablaCRuntime::rt_nnb_revision);
 
-    BIND_ENUM_CONSTANT(ERROR_VERSION_UNMATCH);
-	BIND_ENUM_CONSTANT(ERROR_ALLOCATE_CONTEXT);
-	BIND_ENUM_CONSTANT(ERROR_INITIALIZE_CONTEXT_TWICE);
-	BIND_ENUM_CONSTANT(ERROR_ALLOCATE_CALLBACK_BUFFER);
-	BIND_ENUM_CONSTANT(ERROR_INVALID_BUFFER_INDEX);
-	BIND_ENUM_CONSTANT(ERROR_INIT_VARIABLE);
-	BIND_ENUM_CONSTANT(ERROR_UNKNOWN_FUNCTION);
-	BIND_ENUM_CONSTANT(ERROR_NO_MATCHING_FUNCTION);
-	BIND_ENUM_CONSTANT(NOERROR);
-	BIND_ENUM_CONSTANT(FUNCTION_MATCH);
-	BIND_ENUM_CONSTANT(FUNCTION_DONT_MATCH);
-	BIND_ENUM_CONSTANT(END_OF_VALUES);
+    BIND_ENUM_CONSTANT(RT_RET_ERROR_VERSION_UNMATCH);
+	BIND_ENUM_CONSTANT(RT_RET_ERROR_ALLOCATE_CONTEXT);
+	BIND_ENUM_CONSTANT(RT_RET_ERROR_INITIALIZE_CONTEXT_TWICE);
+	BIND_ENUM_CONSTANT(RT_RET_ERROR_ALLOCATE_CALLBACK_BUFFER);
+	BIND_ENUM_CONSTANT(RT_RET_ERROR_INVALID_BUFFER_INDEX);
+	BIND_ENUM_CONSTANT(RT_RET_ERROR_INIT_VARIABLE);
+	BIND_ENUM_CONSTANT(RT_RET_ERROR_UNKNOWN_FUNCTION);
+	BIND_ENUM_CONSTANT(RT_RET_ERROR_NO_MATCHING_FUNCTION);
+	BIND_ENUM_CONSTANT(RT_RET_NOERROR);
+	BIND_ENUM_CONSTANT(RT_RET_FUNCTION_MATCH);
+	BIND_ENUM_CONSTANT(RT_RET_FUNCTION_DONT_MATCH);
+	BIND_ENUM_CONSTANT(RT_RET_END_OF_VALUES);
+
+	BIND_ENUM_CONSTANT(NN_DATA_TYPE_FLOAT);
+	BIND_ENUM_CONSTANT(NN_DATA_TYPE_INT16);
+	BIND_ENUM_CONSTANT(NN_DATA_TYPE_INT8);
+	BIND_ENUM_CONSTANT(NN_DATA_TYPE_SIGN);
+	BIND_ENUM_CONSTANT(END_OF_NN_DATA_TYPE);
 
     rt_variable_malloc_func = gd_rt_variable_malloc_func;
     rt_variable_free_func = gd_rt_variable_free_func;
@@ -69,13 +75,13 @@ void GDNNablaCRuntime::_bind_methods() {
 }
 
 GDNNablaCRuntime::ReturnValue GDNNablaCRuntime::rt_allocate_context() {
-    ERR_FAIL_COND_V(this->context != 0, NOERROR);
+    ERR_FAIL_COND_V(this->context != 0, ReturnValue::RT_RET_NOERROR);
     return static_cast<ReturnValue>(::rt_allocate_context(&this->context));
 }
 
 GDNNablaCRuntime::ReturnValue GDNNablaCRuntime::rt_initialize_context(PackedByteArray nnb) {
-    ERR_FAIL_COND_V(this->context == 0, NOERROR);
-    ERR_FAIL_COND_V(this->net != nullptr, NOERROR);
+    ERR_FAIL_COND_V(this->context == 0, ReturnValue::RT_RET_NOERROR);
+    ERR_FAIL_COND_V(this->net != nullptr, ReturnValue::RT_RET_NOERROR);
 
     this->net = static_cast<nn_network_t*>(memalloc(nnb.size()));
     ::memcpy(this->net, nnb.ptr(), nnb.size());
@@ -85,7 +91,7 @@ GDNNablaCRuntime::ReturnValue GDNNablaCRuntime::rt_initialize_context(PackedByte
 
 GDNNablaCRuntime::ReturnValue GDNNablaCRuntime::rt_free_context() {
     if(this->context == 0) {
-        return ReturnValue::NOERROR;
+        return ReturnValue::RT_RET_NOERROR;
     }
 
     if(this->net != nullptr) {
