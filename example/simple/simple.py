@@ -81,8 +81,9 @@ def train(f, in_x, in_y, list_x, list_y, epoch_count: int = 10):
 
 
 def main():
-    random.seed(0)
+    random.seed(100)
     generate_dataset("dataset/simple_t.csv", 16384)
+    random.seed(200)
     generate_dataset("dataset/simple_v.csv", 256)
     list_train_x, list_train_y = load_csvdata("dataset/simple_t.csv")
 
