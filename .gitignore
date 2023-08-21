@@ -14,13 +14,15 @@ export_presets.cfg
 data_*/
 mono_crash.*.json
 
-.sconsign.dblite
 .DS_Store
+.sconsign.dblite
 *.os
 *.obj
 *.exp
 *.lib
 
 # example
-example/mnist/*.gz
+example/mnist/dataset/*.gz
 example/mnist/*.nnp
+
+example/simple/dataset/*.csv

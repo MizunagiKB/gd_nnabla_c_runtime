@@ -5,6 +5,7 @@
 :toc: left
 :toclevels: 3
 :icons: font
+:imagesdir: res/image
 :experimental:
 :stem:
 
@@ -16,11 +17,11 @@ CAUTION: この文書は現在作成中です。
 
 === Neural Network Consoleについて
 
-Neural Network Consoleを使用して、NNBファイルを作成する方法を説明します。
+Neural Network Console(以下NNC)を使用して、NNBファイルを作成する方法を説明します。
 
-Neural Network Consoleは、SONYが提供するディープラーニングモデルの開発環境となります。このツールはGUIを備えているため、直感的な操作によってディープラーニングを扱う事が出来ます。
+NNCは、SONYが提供するディープラーニングモデルの開発環境となります。このツールはGUIを備えているため、直感的な操作によってディープラーニングを扱う事が出来ます。
 
-Neural Network Consoleには、Cloud版とWindowsアプリ版が用意されていますが、ここではWindowsアプリ版を使用します。
+NNCには、Cloud版とWindowsアプリ版が用意されていますが、ここではWindowsアプリ版を使用します。
 
 
 === Windowsアプリのダウンロード
@@ -34,14 +35,76 @@ Neural Network Consoleには、Cloud版とWindowsアプリ版が用意されて�
 
 * support.dl.sony.com > Docs > link:https://support.dl.sony.com/docs-ja/%e3%82%bb%e3%83%83%e3%83%88%e3%82%a2%e3%83%83%e3%83%97/[セットアップ]
 
-NOTE: Neural Network Console本体は無料でダウンロードする事が出来るのですが、起動時にアクティベーションが必要となります。
+NOTE: NNC本体は無料でダウンロードする事が出来るのですが、起動時にアクティベーションが必要となります。
  +
 アクティベーションはSonyアカウントかGoogleアカウントが必要となります。
  +
 なお、NVIDIA製GPUがインストールされていると、より高速な動作をします。（ここで扱う程度のものであればGPUは不要です）
 
 
-=== ネットワークを作成とモデル
+=== NNCを使った作成手順
+
+ここでは、非常にシンプルな機械学習モデルを作成します。
+
+今回は以下のようなモデルを作成します。
+
+1. 0.0から1.0の範囲で10種類の値を生成します。
+2. 生成された値の中から最も大きな値を選びます。
+
+
+== プロジェクトの作成
+
+NNCを開いて新しいプロジェクトを選択します。
+
+開くと以下のような画面に切り替わります。
+
+image::nnc_01.jpg[]
+
+
+=== データセットの設定
+
+コンピュータにどんなことをさせたいのかを教えるためのデータセットを渡します。
+
+データセットは問題と回答がセットになったものとなっており、NNCでは以下のように渡します。
+
+[%header,format=csv]
+|===
+include::res/example_01.csv[]
+|===
+
+x\__1やy__6といったカラム名は、CSVのデータを配列として認識させるための特別な表記方法となります。
+
+データセットには以下のように設定してください。
+
+* Trainingにはexample/simple/dataset/simple_t.csvを設定
+* Validationにはexample/simple/dataset/simple_v.csvを設定
+
+
+=== ネットワークの作成
+
+データセットを割り当てたら、学習と推論を行うネットワークを作成します。
+
+ここでは以下のようなネットワークを作ります。
+
+image::nnc_02.jpg[]
+
+準備が出来たら、右上の実行ボタンを押すと学習が開始されます。
+
+
+=== 学習
+
+学習が開始されると、以下のような画面に切り替わります。
+
+学習が進むたびに折れ線が伸びて下降していきます。
+
+image::nnc_04.jpg[]
+
+
+=== NNBの取得
+
+学習が完了しまたら、右側の学習結果リストの上で右クリックをしてください。
+
+表示されるメニューにエクスポートというのがありますから、そこからNNBを選んでファイルを保存してください。
 
 
 == Neural Network Libraryの例
@@ -49,7 +112,7 @@ NOTE: Neural Network Console本体は無料でダウンロードする事が出�
 
 === Neural Network Libraryについて
 
-Neural Network Librariesは、SONYが提供するオープンソースのディープラーニングライブラリです。このライブラリは、Pythonを使用して、少ないコード量で直感的に計算グラフ（ニューラルネットワーク）を定義することができます。
+Neural Network Libraries（以下NNabla）は、SONYが提供するオープンソースのディープラーニングライブラリです。このライブラリは、Pythonを使用して、少ないコード量で直感的に計算グラフ（ニューラルネットワーク）を定義することができます。
 
 === Windowsアプリのダウンロード
 === ネットワークを作成とモデル
