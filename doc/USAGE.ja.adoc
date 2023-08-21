@@ -106,6 +106,8 @@ image::nnc_04.jpg[]
 
 表示されるメニューにエクスポートというのがありますから、そこからNNBを選んでファイルを保存してください。
 
+NOTE: Godotから利用する方法については、demoフォルダに格納されているprojectを開いて確認してください。
+
 
 == Neural Network Libraryの例
 
