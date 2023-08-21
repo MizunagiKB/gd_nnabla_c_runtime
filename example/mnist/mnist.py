@@ -22,8 +22,7 @@ MNIST_FILES = [
     "t10k-labels-idx1-ubyte.gz",
 ]
 DATASET_DIR = "dataset"
-BATCH_SIZE = 100
-
+BATCH_SIZE = 10
 MODEL_FILENAME = "model_mnist.nnp"
 
 
@@ -59,15 +58,12 @@ def convert_data(filename: str, label: bool):
 
 
 def build(in_x: nn.Variable):
-    with nn.parameter_scope("affine1"):
-        h = PF.affine(in_x, 50, name="affine1")
-        h = F.relu(h)
-    with nn.parameter_scope("affine2"):
-        h = PF.affine(h, 20, name="affine2")
-        h = F.relu(h)
-    with nn.parameter_scope("affine3"):
-        h = PF.affine(h, 10, name="affine3")
-        f = F.relu(h)
+    h = PF.affine(in_x, 50, name="affine_1")
+    h = F.relu(h)
+    h = PF.affine(h, 20, name="affine_2")
+    h = F.relu(h)
+    h = PF.affine(h, 10, name="affine_3")
+    f = F.relu(h)
 
     return f
 
@@ -80,12 +76,12 @@ def train(f, in_x, in_y, dict_mnist: dict, epoch_count: int = 10):
 
     train_d = dict_mnist["train-images-idx3-ubyte.gz"]
     train_l = dict_mnist["train-labels-idx1-ubyte.gz"]
-    data_size = len(train_d)
+    batch_count = len(train_d) // BATCH_SIZE
 
     for epoch in range(1, epoch_count + 1):
         print("epoch {:d}".format(epoch))
 
-        for n in range(data_size // BATCH_SIZE):
+        for n in range(0, batch_count, BATCH_SIZE):
             vx = train_d[n : n + BATCH_SIZE]
             vy = np.array(train_l[n : n + BATCH_SIZE])
 
@@ -95,9 +91,8 @@ def train(f, in_x, in_y, dict_mnist: dict, epoch_count: int = 10):
             solver.zero_grad()
             loss.backward()
             solver.update()
-            if ((n + 1) % 100) == 0:
-                print("loss = %.8f" % loss.d)
 
+        print("loss = %.8f" % loss.d)
         print("epoch {:d} done.".format(epoch))
 
 
@@ -134,34 +129,33 @@ def main():
         download_data(MNIST_URL, filename)
         dict_data[filename] = convert_data(filename, filename.find("label") > -1)
 
-    if True:
-        x = nn.Variable(shape=(BATCH_SIZE, 784))
-        y = nn.Variable(shape=(BATCH_SIZE, 10))
-        f = build(x)
+    x = nn.Variable(shape=(BATCH_SIZE, 784))
+    y = nn.Variable(shape=(BATCH_SIZE, 10))
+    f = build(x)
 
-        train(f, x, y, dict_data, 10)
+    train(f, x, y, dict_data, 100)
 
-        contents = {
-            "networks": [
-                {
-                    "name": "net1",
-                    "batch_size": 1,
-                    "names": {"x0": x},
-                    "outputs": {"y0": f},
-                }
-            ],
-            "executors": [
-                {
-                    "name": "runtime",
-                    "network": "net1",
-                    "data": ["x0"],
-                    "output": ["y0"],
-                }
-            ],
-        }
+    contents = {
+        "networks": [
+            {
+                "name": "net1",
+                "batch_size": 1,
+                "names": {"x0": x},
+                "outputs": {"y0": f},
+            }
+        ],
+        "executors": [
+            {
+                "name": "runtime",
+                "network": "net1",
+                "data": ["x0"],
+                "output": ["y0"],
+            }
+        ],
+    }
 
-        # https://nnabla.readthedocs.io/ja/latest/python/api/utils/save_load.html
-        nnabla.utils.save.save(MODEL_FILENAME, contents)
+    # https://nnabla.readthedocs.io/ja/latest/python/api/utils/save_load.html
+    nnabla.utils.save.save(MODEL_FILENAME, contents)
 
     inference(MODEL_FILENAME, dict_data)
 
