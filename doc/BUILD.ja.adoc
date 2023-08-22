@@ -24,16 +24,12 @@ git checkout refs/tags/v1.36.0
 
 [source]
 --
-pushd thirdparty\nnabla-c-runtime
+SET CMAKE_C_FLAGS_RELEASE="/MT"
+SET CMAKE_C_FLAGS_DEBUG="/MTd"
+PUSHD thirdparty\nnabla-c-runtime
 build-tools\msvc\build.bat
-popd
+POPD
 --
-
-上のコマンドを実行するとビルド自体は完了するのですが、Godot側とビルドオプションが異なっているためにリンクが失敗します。
-
-リンクが失敗する原因は、NNabla C RuntimeがMultiThreadDllでビルドされるのに対して、Godot EngineがMultiThreadでビルドされるためです。
-
-現状でNNabla C Runtimeに手を加える事は考えていませんので、ビルド完了後に VisualStudio でソリューションファイルを開いて /MT, /MTd でビルドされる様にコンパイルオプションを修正してビルドしなおしてください。
 
 
 [source]
